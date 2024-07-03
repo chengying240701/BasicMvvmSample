@@ -1,5 +1,6 @@
 // Remember to add this to your usings
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BasicMvvmSample.ViewModels
 {
@@ -10,5 +11,10 @@ namespace BasicMvvmSample.ViewModels
         // This event is implemented by "INotifyPropertyChanged" and is all we need to inform
         // our view about changes.
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void RaisePropertyChanged([CallerMemberName] string? propertyname = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
+        }
     }
 }
